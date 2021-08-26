@@ -7,6 +7,7 @@ public class thirdpersonmovement : MonoBehaviour
     public CharacterController controller;
     public Transform cam;
     public float speed = 2f;
+    public float defaultWalkSpeed = 2f;
     public float runmultiplier;
     public float turnSmoothTime = 0.1f;
 
@@ -24,6 +25,7 @@ public class thirdpersonmovement : MonoBehaviour
     void Start()
     {
         my_Animator = GetComponent<Animator>();
+        defaultWalkSpeed = speed;
     }
 
     void Update()
@@ -55,7 +57,7 @@ public class thirdpersonmovement : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                speed = speed * 2;
+                speed = defaultWalkSpeed * 2;
                 my_Animator.SetBool("isMoving", false);
                 my_Animator.SetBool("isRunning", isWalking);
 
@@ -65,7 +67,7 @@ public class thirdpersonmovement : MonoBehaviour
             {
                my_Animator.SetBool("isRunning", false);
 
-                speed = speed / 2;
+               speed = defaultWalkSpeed;
 
             }
 
