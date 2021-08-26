@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Ground
   - Crystal
+  - GreenCrystal
+  - PinkCrystal
+  - PurpleCrystal
+  - YellowCrystal
+  - OrangeCrystal
   layers:
   - Default
   - TransparentFX
