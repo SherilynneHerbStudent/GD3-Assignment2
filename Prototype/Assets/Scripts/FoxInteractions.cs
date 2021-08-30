@@ -26,6 +26,15 @@ public class FoxInteractions : MonoBehaviour
 
     public Animator my_Animator;
 
+    public bool hasBlue = false;
+    public bool hasGreen = false;
+    public bool hasPink = false;
+    public bool hasPurple = false;
+    public bool hasOrange = false;
+    public bool hasYellow= false;
+
+    public GameObject PrototypeWin;
+
     void Start()
     {
 
@@ -39,8 +48,9 @@ public class FoxInteractions : MonoBehaviour
             Debug.Log("Crystal");
             my_Animator.SetBool("isCrystal", true);
             StartCoroutine(DestroyCrystal());
+            hasBlue = true;
             //Crystal1UI.SetActive(true);
-            
+
         }
 
         if (other.gameObject.CompareTag("GreenCrystal"))
@@ -48,6 +58,7 @@ public class FoxInteractions : MonoBehaviour
             Debug.Log("GreenCrystal");
             my_Animator.SetBool("isCrystal", true);
             StartCoroutine(DestroyCrystal2());
+            hasGreen = true;
             //Crystal1UI.SetActive(true);
 
         }
@@ -57,6 +68,7 @@ public class FoxInteractions : MonoBehaviour
             Debug.Log("PinkCrystal");
             my_Animator.SetBool("isCrystal", true);
             StartCoroutine(DestroyCrystal3());
+            hasPink = true;
             //Crystal1UI.SetActive(true);
 
         }
@@ -66,15 +78,43 @@ public class FoxInteractions : MonoBehaviour
             Debug.Log("PurpleCrystal");
             my_Animator.SetBool("isCrystal", true);
             StartCoroutine(DestroyCrystal4());
+            hasPurple = true;
+            //Crystal1UI.SetActive(true);
+
+        }
+
+        if (other.gameObject.CompareTag("OrangeCrystal"))
+        {
+            Debug.Log("OrangeCrystal");
+            my_Animator.SetBool("isCrystal", true);
+            StartCoroutine(DestroyCrystal5());
+            hasOrange = true;
+            //Crystal1UI.SetActive(true);
+
+        }
+
+        if (other.gameObject.CompareTag("YellowCrystal"))
+        {
+            Debug.Log("YellowCrystal");
+            my_Animator.SetBool("isCrystal", true);
+            StartCoroutine(DestroyCrystal6());
+            hasYellow = true;
             //Crystal1UI.SetActive(true);
 
         }
 
 
     }
-   
-    
-   
+
+    private void Update()
+    {
+        if (hasBlue == true && hasGreen == true && hasOrange == true && hasYellow == true && hasPurple == true && hasPink == true)
+        {
+            StartCoroutine(PrototypeEnd());
+            
+        }
+    }
+
 
     IEnumerator DestroyCrystal()
     {
@@ -105,4 +145,27 @@ public class FoxInteractions : MonoBehaviour
         Crystal1U4.SetActive(true);
     }
 
+    IEnumerator DestroyCrystal5()
+    {
+        yield return new WaitForSeconds(3);
+        Crystal5.SetActive(false);
+        my_Animator.SetBool("isCrystal", false);
+        Crystal1U5.SetActive(true);
+    }
+
+    IEnumerator DestroyCrystal6()
+    {
+        yield return new WaitForSeconds(3);
+        Crystal6.SetActive(false);
+        my_Animator.SetBool("isCrystal", false);
+        Crystal1U6.SetActive(true);
+    }
+
+    IEnumerator PrototypeEnd()
+    {
+        yield return new WaitForSeconds(5);
+        PrototypeWin.SetActive(true);
+        Time.timeScale = 0;
+
+    }
 }
