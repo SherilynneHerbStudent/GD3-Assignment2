@@ -2834,6 +2834,9 @@ MonoBehaviour:
   defaultWalkSpeed: 2
   runmultiplier: 5
   turnSmoothTime: 0.1
+  stamina: 10
+  maxStamina: 10
+  staminaDrainPerSecond: 1
   Gravity: -9.8
   my_Animator: {fileID: 1503497534}
   groundCheck: {fileID: 936929767}
