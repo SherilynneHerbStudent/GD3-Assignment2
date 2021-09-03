@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class thirdpersonmovement : MonoBehaviour
 {
     public CharacterController controller;
+
     public Transform cam;
     public float speed = 2f;
     public float defaultWalkSpeed = 2f;
@@ -22,12 +23,21 @@ public class thirdpersonmovement : MonoBehaviour
     Vector3 vel;
     bool isGrounded;
     bool sprinting;
-   
+
+    public Slider StaminaBar;
+    public static thirdpersonmovement instance;
+    public GameObject FoxHappyUI;
+    public GameObject FoxTiredUI;
 
     public Transform groundCheck;
     LayerMask groundMask;
 
     private WaitForSeconds staminaDepletion = new WaitForSeconds(1f);
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
@@ -35,6 +45,8 @@ public class thirdpersonmovement : MonoBehaviour
         defaultWalkSpeed = speed;
         stamina = maxStamina;
         sprinting = false;
+        StaminaBar.maxValue = maxStamina;
+        StaminaBar.value = maxStamina;
     }
 
     void Update()
@@ -102,6 +114,7 @@ public class thirdpersonmovement : MonoBehaviour
         while (sprinting == true)
         {
             stamina -= staminaDrainPerSecond;
+            StaminaBar.value = stamina;
             yield return staminaDepletion;
         }
     }
