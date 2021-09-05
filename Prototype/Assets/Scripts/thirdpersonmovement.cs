@@ -15,6 +15,8 @@ public class thirdpersonmovement : MonoBehaviour
     public int stamina;
     public int maxStamina;
     public int staminaDrainPerSecond;
+    public int staminaRegenPerSecond;
+    public GameObject foxPlayer;
 
     public float Gravity = -9.8f;
 
@@ -23,6 +25,8 @@ public class thirdpersonmovement : MonoBehaviour
     Vector3 vel;
     bool isGrounded;
     bool sprinting;
+    public bool inBurrow;
+    bool onBurrow;
 
     public Slider StaminaBar;
     public static thirdpersonmovement instance;
@@ -33,11 +37,7 @@ public class thirdpersonmovement : MonoBehaviour
     LayerMask groundMask;
 
     private WaitForSeconds staminaDepletion = new WaitForSeconds(1f);
-
-    private void Awake()
-    {
-        instance = this;
-    }
+    private WaitForSeconds staminaRegen = new WaitForSeconds(2f);
 
     void Start()
     {
@@ -45,6 +45,8 @@ public class thirdpersonmovement : MonoBehaviour
         defaultWalkSpeed = speed;
         stamina = maxStamina;
         sprinting = false;
+        inBurrow = false;
+        onBurrow = false;
         StaminaBar.maxValue = maxStamina;
         StaminaBar.value = maxStamina;
     }
@@ -98,6 +100,29 @@ public class thirdpersonmovement : MonoBehaviour
             
         }
 
+        if (onBurrow == true && Input.GetKeyDown(KeyCode.E))
+        {
+            foxPlayer.SetActive(false);
+            inBurrow = true;
+        }
+
+        if (inBurrow == true)
+        {
+            StartCoroutine(StaminaRegeneration());
+
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                foxPlayer.SetActive(true);
+                inBurrow = false;
+            }
+
+            else
+            {
+                foxPlayer.SetActive(false);
+                inBurrow = true;
+            }
+        }
+
         if (stamina > maxStamina)
         {
             stamina = maxStamina;
@@ -109,6 +134,19 @@ public class thirdpersonmovement : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Burrow"))
+        {
+            onBurrow = true;
+        }
+
+        else
+        {
+            onBurrow = false;
+        }
+    }
+
     IEnumerator StaminaSystem()
     {
         while (sprinting == true)
@@ -116,6 +154,18 @@ public class thirdpersonmovement : MonoBehaviour
             stamina -= staminaDrainPerSecond;
             StaminaBar.value = stamina;
             yield return staminaDepletion;
+        }
+    }
+
+    IEnumerator StaminaRegeneration()
+    {
+        yield return new WaitForSeconds(2);
+
+        while (inBurrow == true)
+        {
+            stamina += staminaRegenPerSecond;
+            StaminaBar.value = stamina;
+            yield return staminaRegen;
         }
     }
 

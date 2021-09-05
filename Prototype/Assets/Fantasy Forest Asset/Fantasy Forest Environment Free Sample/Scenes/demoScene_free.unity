@@ -7009,7 +7009,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 918220419}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.012805282
@@ -17912,11 +17912,14 @@ MonoBehaviour:
   defaultWalkSpeed: 2
   runmultiplier: 5
   turnSmoothTime: 0.1
-  stamina: 10
-  maxStamina: 10
-  staminaDrainPerSecond: 1
+  stamina: 100
+  maxStamina: 100
+  staminaDrainPerSecond: 10
+  staminaRegenPerSecond: 5
+  foxPlayer: {fileID: 1857916589}
   Gravity: -9.8
   my_Animator: {fileID: 1503497534}
+  inBurrow: 0
   StaminaBar: {fileID: 478457952}
   FoxHappyUI: {fileID: 1420448049}
   FoxTiredUI: {fileID: 666365542}
@@ -18648,6 +18651,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759177384}
   m_CullTransparentMesh: 1
+--- !u!1 &1857916589 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4020983980232809014, guid: 9fedecbd1aa68924b816f15cb97e611a, type: 3}
+  m_PrefabInstance: {fileID: 84549269}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1928136689
 PrefabInstance:
   m_ObjectHideFlags: 0
