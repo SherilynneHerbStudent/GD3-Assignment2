@@ -32,6 +32,7 @@ public class thirdpersonmovement : MonoBehaviour
     public static thirdpersonmovement instance;
     public GameObject FoxHappyUI;
     public GameObject FoxTiredUI;
+    public GameObject FoxHidingUI;
 
     public Transform groundCheck;
     LayerMask groundMask;
@@ -62,9 +63,13 @@ public class thirdpersonmovement : MonoBehaviour
         bool isWalking = hasHorizontalInput || hasVerticalInput;
         my_Animator.SetBool("isMoving", isWalking);
         isGrounded = Physics.CheckSphere(groundCheck.position, 0.5f, groundMask);
-        
-       
-        if(isGrounded == false)
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
+        if (isGrounded == false)
         {
             vel.y += Gravity * Time.deltaTime;
             controller.Move(vel * Time.deltaTime);
@@ -91,7 +96,8 @@ public class thirdpersonmovement : MonoBehaviour
             {
                sprinting = false;
                my_Animator.SetBool("isRunning", false);
-
+                FoxHappyUI.SetActive(false);
+                FoxTiredUI.SetActive(true);
                speed = defaultWalkSpeed;
 
             }
@@ -114,12 +120,17 @@ public class thirdpersonmovement : MonoBehaviour
             {
                 foxPlayer.SetActive(true);
                 inBurrow = false;
+                FoxHidingUI.SetActive(false);
+                FoxHappyUI.SetActive(true);
             }
 
             else
             {
                 foxPlayer.SetActive(false);
                 inBurrow = true;
+                FoxTiredUI.SetActive(false);
+                FoxHidingUI.SetActive(true);
+                FoxHappyUI.SetActive(false);
             }
         }
 
@@ -169,4 +180,6 @@ public class thirdpersonmovement : MonoBehaviour
         }
     }
 
+
+    
 }
