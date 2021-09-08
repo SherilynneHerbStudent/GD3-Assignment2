@@ -175,6 +175,9 @@ public class NewEnemy : MonoBehaviour
 
     private void ResetEnemy()
     {
+        enemy.transform.position = new Vector3(enemyRespawnPoint.position.x, enemyRespawnPoint.position.y, enemyRespawnPoint.position.z);
+        playerInAttackRange = false;
+        playerInSightRange = false;
         transform.position = Vector3.MoveTowards(transform.position, EnemySP, Time.deltaTime);
         ScaredUI.SetActive(false);
     }
