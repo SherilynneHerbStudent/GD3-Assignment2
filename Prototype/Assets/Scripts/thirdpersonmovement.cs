@@ -26,13 +26,14 @@ public class thirdpersonmovement : MonoBehaviour
     bool isGrounded;
     bool sprinting;
     public bool inBurrow;
-    bool onBurrow;
+    public bool onBurrow;
 
     public Slider StaminaBar;
     public static thirdpersonmovement instance;
     public GameObject FoxHappyUI;
     public GameObject FoxTiredUI;
     public GameObject FoxHidingUI;
+    public GameObject Enemy;
 
     public Transform groundCheck;
     LayerMask groundMask;
@@ -40,6 +41,9 @@ public class thirdpersonmovement : MonoBehaviour
     private WaitForSeconds staminaDepletion = new WaitForSeconds(1f);
     private WaitForSeconds staminaRegen = new WaitForSeconds(2f);
 
+    public GameObject BurrowScene;
+    public GameObject GameCamera;
+    public GameObject GameLight;
     void Start()
     {
         my_Animator = GetComponent<Animator>();
@@ -91,24 +95,31 @@ public class thirdpersonmovement : MonoBehaviour
                 my_Animator.SetBool("isRunning", isWalking);
                 StartCoroutine(StaminaSystem());
             }
-            
-            else if (Input.GetKeyUp(KeyCode.LeftShift) || stamina <= 0) 
+
+            else if (Input.GetKeyUp(KeyCode.LeftShift) || stamina <= 0)
             {
-               sprinting = false;
-               my_Animator.SetBool("isRunning", false);
+                sprinting = false;
+                my_Animator.SetBool("isRunning", false);
                 FoxHappyUI.SetActive(false);
-                FoxTiredUI.SetActive(true);
-               speed = defaultWalkSpeed;
+                
+                speed = defaultWalkSpeed;
+
+                if (stamina == 0)
+                {
+                    FoxTiredUI.SetActive(true);
+                }
 
             }
 
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
-            
+
         }
 
         if (onBurrow == true && Input.GetKeyDown(KeyCode.E))
         {
-            foxPlayer.SetActive(false);
+           
+            StartCoroutine(Rolling());
+            //foxPlayer.SetActive(false);
             inBurrow = true;
         }
 
@@ -118,6 +129,8 @@ public class thirdpersonmovement : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.E))
             {
+                my_Animator.SetBool("isRolling", false);
+                my_Animator.SetBool("isWalking", true);
                 foxPlayer.SetActive(true);
                 inBurrow = false;
                 FoxHidingUI.SetActive(false);
@@ -128,9 +141,14 @@ public class thirdpersonmovement : MonoBehaviour
             {
                 foxPlayer.SetActive(false);
                 inBurrow = true;
-                FoxTiredUI.SetActive(false);
+                BurrowScene.SetActive(true);
                 FoxHidingUI.SetActive(true);
+                GameLight.SetActive(false);
+                GameCamera.SetActive(false);
                 FoxHappyUI.SetActive(false);
+                FoxTiredUI.SetActive(false);
+                
+                
             }
         }
 
@@ -150,11 +168,14 @@ public class thirdpersonmovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Burrow"))
         {
             onBurrow = true;
+           
         }
 
-        else
+        else if (collision.CompareTag("Burrow") == false)
         {
             onBurrow = false;
+          
+
         }
     }
 
@@ -180,6 +201,13 @@ public class thirdpersonmovement : MonoBehaviour
         }
     }
 
+    IEnumerator Rolling()
+    {
+        yield return new WaitForSeconds(2);
 
+        my_Animator.SetBool("isRolling", true);
+    }
+
+    
     
 }

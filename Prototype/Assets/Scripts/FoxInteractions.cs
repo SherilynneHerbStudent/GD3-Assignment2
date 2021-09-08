@@ -34,6 +34,7 @@ public class FoxInteractions : MonoBehaviour
     public bool hasYellow= false;
 
     public GameObject PrototypeWin;
+    public GameManager GM;
 
     void Start()
     {
@@ -49,6 +50,7 @@ public class FoxInteractions : MonoBehaviour
             my_Animator.SetBool("isCrystal", true);
             StartCoroutine(DestroyCrystal());
             hasBlue = true;
+            GM.blueGem.SetActive(true);
             //Crystal1UI.SetActive(true);
 
         }
@@ -59,6 +61,7 @@ public class FoxInteractions : MonoBehaviour
             my_Animator.SetBool("isCrystal", true);
             StartCoroutine(DestroyCrystal2());
             hasGreen = true;
+            GM.GreenGem.SetActive(true);
             //Crystal1UI.SetActive(true);
 
         }
@@ -69,6 +72,7 @@ public class FoxInteractions : MonoBehaviour
             my_Animator.SetBool("isCrystal", true);
             StartCoroutine(DestroyCrystal3());
             hasPink = true;
+            GM.PinkGem.SetActive(true);
             //Crystal1UI.SetActive(true);
 
         }
@@ -79,6 +83,7 @@ public class FoxInteractions : MonoBehaviour
             my_Animator.SetBool("isCrystal", true);
             StartCoroutine(DestroyCrystal4());
             hasPurple = true;
+            GM.PurpleGem.SetActive(true);
             //Crystal1UI.SetActive(true);
 
         }
@@ -89,6 +94,7 @@ public class FoxInteractions : MonoBehaviour
             my_Animator.SetBool("isCrystal", true);
             StartCoroutine(DestroyCrystal5());
             hasOrange = true;
+            GM.OrangeGem.SetActive(true);
             //Crystal1UI.SetActive(true);
 
         }
@@ -99,6 +105,7 @@ public class FoxInteractions : MonoBehaviour
             my_Animator.SetBool("isCrystal", true);
             StartCoroutine(DestroyCrystal6());
             hasYellow = true;
+            GM.YellowGem.SetActive(true);
             //Crystal1UI.SetActive(true);
 
         }

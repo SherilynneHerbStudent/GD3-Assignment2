@@ -12,6 +12,7 @@ TagManager:
   - YellowCrystal
   - OrangeCrystal
   - Burrow
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
+  - Player
   - 
   - 
   - 
