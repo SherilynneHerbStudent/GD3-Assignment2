@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Fantasy Forest Asset/Fantasy Forest Environment Free Sample/Scenes/demoScene_free.unity
     guid: 7769f33fb4fa2e5458344a36556ad760
   - enabled: 1
-    path: Assets/Scenes/Burrow.unity
-    guid: 5e5b00ca46f92f8499dc0bfaec011f35
+    path: Assets/Scenes/GameOver.unity
+    guid: 8fb82f6ff625612468a29fceeb2aca2c
+  - enabled: 1
+    path: Assets/Scenes/LoseGame.unity
+    guid: e78e08abc7815b249bbe5b6c76ab583f
   m_configObjects: {}

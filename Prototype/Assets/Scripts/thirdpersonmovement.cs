@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class thirdpersonmovement : MonoBehaviour
 {
@@ -70,7 +71,7 @@ public class thirdpersonmovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            SceneManager.LoadScene("Menu");
         }
 
         if (isGrounded == false)
@@ -208,6 +209,7 @@ public class thirdpersonmovement : MonoBehaviour
         my_Animator.SetBool("isRolling", true);
     }
 
+  
     
-    
+
 }

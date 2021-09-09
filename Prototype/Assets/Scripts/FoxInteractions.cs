@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FoxInteractions : MonoBehaviour
 {
@@ -110,6 +111,12 @@ public class FoxInteractions : MonoBehaviour
 
         }
 
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("dead");
+            SceneManager.LoadScene("LoseGame");
+        }
+
 
     }
 
@@ -171,8 +178,7 @@ public class FoxInteractions : MonoBehaviour
     IEnumerator PrototypeEnd()
     {
         yield return new WaitForSeconds(5);
-        PrototypeWin.SetActive(true);
-        Time.timeScale = 0;
+        SceneManager.LoadScene("GameOver");
 
     }
 }
