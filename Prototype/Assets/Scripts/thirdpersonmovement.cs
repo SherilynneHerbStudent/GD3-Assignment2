@@ -45,6 +45,9 @@ public class thirdpersonmovement : MonoBehaviour
     public GameObject BurrowScene;
     public GameObject GameCamera;
     public GameObject GameLight;
+
+    public GameManager GM;
+    public GameObject AL;
     void Start()
     {
         my_Animator = GetComponent<Animator>();
@@ -101,13 +104,14 @@ public class thirdpersonmovement : MonoBehaviour
             {
                 sprinting = false;
                 my_Animator.SetBool("isRunning", false);
-                FoxHappyUI.SetActive(false);
+                
                 
                 speed = defaultWalkSpeed;
 
                 if (stamina == 0)
                 {
                     FoxTiredUI.SetActive(true);
+                    FoxHappyUI.SetActive(false);
                 }
 
             }
@@ -118,8 +122,8 @@ public class thirdpersonmovement : MonoBehaviour
 
         if (onBurrow == true && Input.GetKeyDown(KeyCode.E))
         {
-           
-            StartCoroutine(Rolling());
+            AL.SetActive(true);
+            
             //foxPlayer.SetActive(false);
             inBurrow = true;
         }
@@ -202,12 +206,7 @@ public class thirdpersonmovement : MonoBehaviour
         }
     }
 
-    IEnumerator Rolling()
-    {
-        yield return new WaitForSeconds(2);
-
-        my_Animator.SetBool("isRolling", true);
-    }
+   
 
   
     

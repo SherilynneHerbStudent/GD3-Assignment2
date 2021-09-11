@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     public GameObject YellowGem;
     public GameObject OrangeGem;
 
+    public GameObject AL;
+
     private void Start()
     {
         blueGem.SetActive(false);
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
     {
         GameCamera.SetActive(true);
         Burrow.SetActive(false);
+        AL.SetActive(false);
         FoxHidingUI.SetActive(false);
         FoxHappyUI.SetActive(true);
         BurrowLight.SetActive(true);
